@@ -1,6 +1,6 @@
 "use strict";
 
-var dayjs = require('../node_modules/dayjs');
+const dayjs = require('../node_modules/dayjs');
 
 function createFragment(htmlString) {
     return document.createRange().createContextualFragment(htmlString);
@@ -11,7 +11,7 @@ function getContentString(messageContent) {
 }
 
 function addGroupStart(parent, authorName, authorColor, authorAvatarUrl, timestamp, messageContent) {
-    var timeString = transformTimestamp(timestamp);
+    const timeString = transformTimestamp(timestamp);
     parent.add(createFragment(`
         <div class="message-2qnXI6 cozyMessage-3V1Y8y groupStart-23k01U wrapper-2a6GCs cozy-3raOZG zalgo-jN1Ica">
             <div class="contents-2mQqc9"><img src="${authorAvatarUrl}" class="avatar-1BDn8e clickable-1bVtEA">
@@ -31,8 +31,8 @@ function addMessage(parent, messageContent) {
 }
 
 function transformTimestamp(timestamp) {
-    var now = dayjs();
-    var then = dayjs(timestamp);
+    const now = dayjs();
+    const then = dayjs(timestamp);
     if (now.year() !== then.year() || now.month() !== then.month()) {
         return now.format('YYYY-MM-DD');
     } else if (then.day() === now.day()) {
