@@ -4,7 +4,7 @@ const puppeteer = require('puppeteer');
 const RUN_HEADLESS = true;
 const REDIRECT_PUPPETEER_CONSOLE = false;
 const DEBUG_SCREENSHOT = false;
-const JPEG_QUALITY = 20;
+const JPEG_QUALITY = 75;
 
 async function generateScreenshot(messageData) {
     const browser = await puppeteer.launch({ headless: RUN_HEADLESS });
@@ -32,13 +32,16 @@ async function generateScreenshot(messageData) {
     try {
         await page.goto(
             `file:${path.join(__dirname, 'src', 'index.html')}`,
-            {waitUntil: 'networkidle2'}
+            {waitUntil: 'networkidle0'}
         );
 
         // Enter document context and add message data
         await page.evaluate((messageData) => {
             addMessages(messageData);
+            window.scrollBy(0, window.innerHeight);
         }, messageData);
+
+        await page.waitForTimeout(100);  // hacky but it lets the images load?
 
         const body = await page.$('body');
         if (DEBUG_SCREENSHOT) {
