@@ -41,3 +41,23 @@ function transformTimestamp(timestamp) {
         return now.format('YYYY-MM-DD');
     }
 }
+
+function addMessages(messageData) {
+    const authors = messageData.authors;
+    const msgs = messageData.messages;
+    const messagesContainer = document.getElementById('messages-container');
+
+    let lastAuthor = null;
+    for (let msg of msgs) {
+        let author = authors[msg.author];
+        if (lastAuthor === null || author !== lastAuthor) {
+            addGroupStart(
+                messagesContainer, author.name, author.color, author.avatarUrl,
+                msg.timestamp, msg.content
+            );
+        } else {
+            addMessage(messagesContainer, msg.content);
+        }
+        lastAuthor = author;
+    }
+}
