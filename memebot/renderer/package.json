@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dayjs": "^1.10.4",
     "puppeteer": "^7.1.0"
   }
 }

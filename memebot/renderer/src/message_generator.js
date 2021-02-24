@@ -1,5 +1,7 @@
 "use strict";
 
+var dayjs = require('../node_modules/dayjs');
+
 function create_fragment(html_string) {
   return document.createRange().createContextualFragment(html_string);
 }
@@ -25,4 +27,18 @@ function add_message(parent, message_content) {
         ${get_content_string(message_content)}
     </div>
   `));
+}
+
+function transformTimestamp(timestamp) {
+    var now = dayjs();
+    var then = dayjs(timestamp);
+    if (now.year() !== then.year() || now.month() !== then.month()) {
+        return now.format('YYYY-MM-DD');
+    } else if (then.day() === now.day()) {
+        return `Today at ${then.format('HH:mm')}`;
+    } else if (then.day() === now.day() - 1) {
+        return `Yesterday at ${then.format('HH:mm')}`;
+    } else {
+        return now.format('YYYY-MM-DD');
+    }
 }
