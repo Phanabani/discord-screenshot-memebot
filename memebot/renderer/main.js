@@ -1,12 +1,13 @@
 const path = require('path');
 const puppeteer = require('puppeteer');
 
+const RUN_HEADLESS = true;
 const REDIRECT_PUPPETEER_CONSOLE = false;
-const DEBUG_SCREENSHOT = true;
+const DEBUG_SCREENSHOT = false;
 const JPEG_QUALITY = 20;
 
 async function generateScreenshot(messageData) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({ headless: RUN_HEADLESS });
     const page = await browser.newPage();
     page.setViewport({
         width: 1920,
@@ -60,7 +61,8 @@ async function generateScreenshot(messageData) {
         console.error(e);
     }
 
-    await browser.close();
+    if (RUN_HEADLESS)
+        await browser.close();
 }
 
 let messageData = process.argv[2];
