@@ -1,7 +1,5 @@
 "use strict";
 
-const dayjs = require('../node_modules/dayjs');
-
 function createFragment(htmlString) {
     return document.createRange().createContextualFragment(htmlString);
 }
