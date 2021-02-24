@@ -2,7 +2,8 @@ const path = require('path');
 const puppeteer = require('puppeteer');
 
 const REDIRECT_PUPPETEER_CONSOLE = false;
-const DEBUG_SCREENSHOT = false;
+const DEBUG_SCREENSHOT = true;
+const JPEG_QUALITY = 20;
 
 async function generateScreenshot(messageData) {
     const browser = await puppeteer.launch();
@@ -41,14 +42,16 @@ async function generateScreenshot(messageData) {
         const body = await page.$('body');
         if (DEBUG_SCREENSHOT) {
             await body.screenshot({
-                path: 'tmp.png'
+                path: 'tmp.jpg',
+                type: 'jpeg',
+                quality: JPEG_QUALITY
             });
         } else {
             // Write base64 image representation of body to stdout
             let screenshot = await body.screenshot({
                 encoding: 'base64',
-                type: 'png',
-                // quality: 100,  // only applies to jpegs
+                type: 'jpeg',
+                quality: JPEG_QUALITY,  // only applies to jpegs
                 omitBackground: false,
             });
             console.log(screenshot);
