@@ -1,0 +1,51 @@
+@font-face {
+  font-family: 'Whitney';
+  font-weight: 300;
+  font-style: normal;
+  src: url("fonts/whitneylight.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Whitney';
+  font-weight: 400;
+  font-style: normal;
+  src: url("fonts/whitneybook.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Whitney';
+  font-weight: 500;
+  font-style: normal;
+  src: url("fonts/whitneymedium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Whitney';
+  font-weight: 600;
+  font-style: normal;
+  src: url("fonts/whitneysemibold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'Whitney';
+  font-weight: 700;
+  font-style: normal;
+  src: url("fonts/whitneybold.otf") format("opentype");
+}
+
+body {
+  height: auto;
+  width: min-content;
+  background-color: rgb(54, 57, 63);
+}
+
+#messages-container {
+  width: max-content;
+  /* this fixes a problem with the first message's top margin
+     not contributing to body's bounding box */
+  overflow-y: auto;
+}
+
+#meme-image {
+  width: 100%;
+}
